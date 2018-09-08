@@ -48,8 +48,8 @@ public class Circle extends Shape {
 
     /**
      *
-     * @param xAxisRadius
-     * @throws ShapeException
+     * @param xAxisRadius this is a positive integer representing the radius of the circle
+     * @throws ShapeException throws exception if radius is not valid
      */
     public void setXAxisRadius(double xAxisRadius) throws ShapeException {
         Validator.validatePositiveDouble(xAxisRadius, "Invalid xAxisRadius");
