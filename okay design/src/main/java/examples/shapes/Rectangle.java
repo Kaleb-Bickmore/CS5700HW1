@@ -20,13 +20,13 @@ public class Rectangle extends Square {
         return this.width;
     }
 
-    public void setWidth(Double width) throws ShapeException {
+    public void setWidth(double width) throws ShapeException {
         Validator.validatePositiveDouble(width, "Invalid width");
         this.width = width;
 
     }
 
-    public void setSize(Double width, double height) throws ShapeException{
+    public void setSize(double height, double width) throws ShapeException{
         Validator.validatePositiveDouble(width,"Invalid width");
         this.width = width;
         this.setHeight(height);
