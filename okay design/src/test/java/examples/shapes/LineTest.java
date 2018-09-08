@@ -27,7 +27,6 @@ public class LineTest {
         assertEquals(4.444, myLine.getPoint2().getX(), 0);
         assertEquals(5.5555, myLine.getPoint2().getY(), 0);
     }
-
     @Test
     public void testInvalidConstruction() throws Exception {
         Point p1 = new Point(1,2);

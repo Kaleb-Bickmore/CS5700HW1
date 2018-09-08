@@ -12,11 +12,9 @@ public class Validator {
             throw new ShapeException(errorMessage);
     }
 
-    public static void validateTriangle(Line firstLine, Line secondLine, Line thirdLine, String errorMessage)//...
+    public static void validateTriangle(double firstSide, double secondSide, double thirdSide, String errorMessage)//...
             throws ShapeException{
-        if(firstLine.computeLength()<secondLine.computeLength()+thirdLine.computeLength()||//...
-                thirdLine.computeLength()< secondLine.computeLength()+firstLine.computeLength()||//...
-                secondLine.computeLength()<thirdLine.computeLength()+firstLine.computeLength())
+        if(firstSide >= secondSide+thirdSide|| thirdSide >= secondSide+firstSide||secondSide >= thirdSide+firstSide)
         {
             throw new ShapeException(errorMessage);
         }

@@ -1,6 +1,6 @@
 package examples.shapes;
 
-public abstract class Shape {
+public abstract class Shape{
 
     private Point center;
 

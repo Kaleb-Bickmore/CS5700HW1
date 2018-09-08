@@ -9,46 +9,52 @@ package examples.shapes;
 @SuppressWarnings("WeakerAccess")
 public class Circle extends Shape {
 
-    private double radius;
+    private double xAxisRadius;
 
     /**
      * Constructor with x-y Location for center
      *
      * @param x                 The x-location of the center of the circle -- must be a valid double
      * @param y                 The y-location of the center of the circle
-     * @param radius            The radius of the circle -- must be greater or equal to zero.
+     * @param xAxisRadius       The xAxisRadius of the circle -- must be greater or equal to zero.
      * @throws ShapeException   The exception thrown if the x, y, or z are not valid
      */
-    public Circle(double x, double y, double radius) throws ShapeException {
+    public Circle(double x, double y, double xAxisRadius) throws ShapeException {
         super(new Point(x,y));
-        Validator.validatePositiveDouble(radius, "Invalid radius");
-        this.radius = radius;
+        Validator.validatePositiveDouble(xAxisRadius, "Invalid xAxisRadius");
+        this.xAxisRadius = xAxisRadius;
     }
 
     /**
      * Constructor with a Point for center
      *
      * @param center            The x-location of the center of the circle -- must be a valid point
-     * @param radius            The radius of the circle -- must be greater or equal to zero.
+     * @param xAxisRadius       The xAxisRadius of the circle -- must be greater or equal to zero.
      * @throws ShapeException   The exception thrown if the x, y, or z are not valid
      */
-    public Circle(Point center, double radius) throws ShapeException {
+    public Circle(Point center, double xAxisRadius) throws ShapeException {
         super(center);
-        Validator.validatePositiveDouble(radius, "Invalid radius");
-        this.radius = radius;
+        Validator.validatePositiveDouble(xAxisRadius, "Invalid xAxisRadius");
+        this.xAxisRadius = xAxisRadius;
 
 
-        this.radius = radius;
+        this.xAxisRadius = xAxisRadius;
     }
 
     /**
-     * @return  The radius of the circle
+     * @return  The xAxisRadius of the circle
      */
-    public double getRadius() { return radius; }
+    public double getXAxisRadius() { return xAxisRadius; }
+
     /**
-     * @return  Set the radius of the circle
+     *
+     * @param xAxisRadius
+     * @throws ShapeException
      */
-    public void setRadius(double radius) { this.radius=radius; }
+    public void setXAxisRadius(double xAxisRadius) throws ShapeException {
+        Validator.validatePositiveDouble(xAxisRadius, "Invalid xAxisRadius");
+        this.xAxisRadius = xAxisRadius;
+    }
 
 
     /**
@@ -61,14 +67,14 @@ public class Circle extends Shape {
      */
     public void scale(double scaleFactor) throws ShapeException {
         Validator.validatePositiveDouble(scaleFactor, "Invalid scale factor");
-        radius *= scaleFactor;
+        xAxisRadius *= scaleFactor;
     }
 
     /**
      * @return  The area of the circle.
      */
     public double computeArea() {
-        return Math.PI * Math.pow(radius, 2);
+        return Math.PI * Math.pow(xAxisRadius, 2);
     }
 
 }

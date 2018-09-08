@@ -1,24 +1,24 @@
 package examples.shapes;
 
 public class Triangle extends Shape{
-    private Line firstLine;
-    private Line secondLine;
-    private Line thirdLine;
+    private double firstSide;
+    private double secondSide;
+    private Double thirdSide;
 
     /**
-     * @param center center of the triangle
-     * @param firstPoint this is one of the points on the triangle
-     * @param secondPoint this is one of the points on the triangle
-     * @param thirdPoint this is one of the points on the triangle
+     *
+     * @param center
+     * @param firstSide
+     * @param secondSide
+     * @param thirdSide
      * @throws ShapeException
      */
-    public Triangle(Point center, Point firstPoint, Point secondPoint, Point thirdPoint ) throws ShapeException {
+    public Triangle(Point center, double firstSide, double secondSide, double thirdSide ) throws ShapeException {
         super(center);
-        Validator.validateTriangle(new Line(firstPoint, secondPoint),new Line(secondPoint, thirdPoint),
-                new Line(thirdPoint, firstPoint),"Invalid points for triangle");
-        this.firstLine = new Line(firstPoint, secondPoint);
-        this.secondLine = new Line(secondPoint, thirdPoint);
-        this.thirdLine = new Line(thirdPoint, firstPoint);
+        Validator.validateTriangle(firstSide, secondSide,thirdSide,"invalid triangle");
+        this.firstSide = firstSide;
+        this.secondSide = secondSide;
+        this.thirdSide = firstSide;
     }
     /**
      * This function uses Heron's formula to calculate the area of our triangle
@@ -26,8 +26,8 @@ public class Triangle extends Shape{
      */
     public double computeArea(){
 
-        double s=(1/2)*(firstLine.computeLength()+secondLine.computeLength()+thirdLine.computeLength());
-        double area =Math.sqrt(s*(s-firstLine.computeLength())*(s-secondLine.computeLength())*(s-thirdLine.computeLength()));
+        double s=(1/2)*(firstSide+secondSide+thirdSide);
+        double area =Math.sqrt(s*(s-firstSide)*(s-secondSide)*(s-thirdSide));
         return area;
     }
 

@@ -1,12 +1,31 @@
 package examples.shapes;
 
 public class Square extends Shape {
-    private Point center;
     private Double height;
-    public Square(Point center, double size) throws ShapeException{
+
+    /**
+     *
+     * @param center
+     * @param height
+     * @throws ShapeException
+     */
+    public Square(Point center, double height) throws ShapeException{
         super(center);
-        Validator.validatePositiveDouble(size,"Not a valid size");
-        this.height = size;
+        Validator.validatePositiveDouble(height,"Invalid height");
+        this.height = height;
+    }
+
+    /**
+     *
+     * @param x
+     * @param y
+     * @param height
+     * @throws ShapeException
+     */
+    public Square(double x, double y, double height) throws ShapeException{
+        super(new Point(x, y));
+        Validator.validatePositiveDouble(height,"Invalid height");
+        this.height = height;
     }
 
     /**
@@ -25,9 +44,10 @@ public class Square extends Shape {
 
     /**
      *
-     * @param size
+     * @param height
      */
-    public void setHeight(Double size) {
-        this.height = size;
+    public void setHeight(double height)throws ShapeException {
+        Validator.validatePositiveDouble(height, "Invalid height");
+        this.height = height;
     }
 }
