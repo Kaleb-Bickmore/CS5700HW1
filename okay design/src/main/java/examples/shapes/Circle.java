@@ -7,8 +7,8 @@ package examples.shapes;
  *
  */
 @SuppressWarnings("WeakerAccess")
-public class Circle {
-    private Point center;
+public class Circle extends Shape {
+
     private double radius;
 
     /**
@@ -20,8 +20,8 @@ public class Circle {
      * @throws ShapeException   The exception thrown if the x, y, or z are not valid
      */
     public Circle(double x, double y, double radius) throws ShapeException {
+        super(new Point(x,y));
         Validator.validatePositiveDouble(radius, "Invalid radius");
-        center = new Point(x, y);
         this.radius = radius;
     }
 
@@ -33,33 +33,23 @@ public class Circle {
      * @throws ShapeException   The exception thrown if the x, y, or z are not valid
      */
     public Circle(Point center, double radius) throws ShapeException {
+        super(center);
         Validator.validatePositiveDouble(radius, "Invalid radius");
-        if (center==null)
-            throw new ShapeException("Invalid center point");
+        this.radius = radius;
 
-        this.center = center;
+
         this.radius = radius;
     }
-
-    /**
-     * @return  The center of the circle
-     */
-    public Point getCenter() { return center; }
 
     /**
      * @return  The radius of the circle
      */
     public double getRadius() { return radius; }
-
     /**
-     * Move the circle
-     * @param deltaX            a delta change for the x-location of center of the circle
-     * @param deltaY            a delta change for the y-location of center of the circle
-     * @throws ShapeException   Exception thrown if either the delta x or y are not valid doubles
+     * @return  Set the radius of the circle
      */
-    public void move(double deltaX, double deltaY) throws ShapeException {
-        center.move(deltaX, deltaY);
-    }
+    public void setRadius(double radius) { this.radius=radius; }
+
 
     /**
      * Scale the circle
