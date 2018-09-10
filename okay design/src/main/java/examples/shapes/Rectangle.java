@@ -5,9 +5,10 @@ package examples.shapes;
  *
  *  This class represents a rectangle. This class expands on the square class and implements new methods.
  */
-public class Rectangle extends Square {
-
+public class Rectangle extends Shape {
+    private double height;
     private double width;
+    private Point[] vertices;
 
     /**
      *
@@ -17,9 +18,16 @@ public class Rectangle extends Square {
      * @throws ShapeException throws exception if either height or width are invalid
      */
     public Rectangle(Point center,double height, double width)throws ShapeException{
-        super(center,height);
+        super(center);
         Validator.validatePositiveDouble(width,"Invalid width");
         this.width=width;
+        this.height=height;
+        Point point1 = new Point(center.getX()-(width/2),center.getY()-(height/2));
+        Point point2 = new Point(center.getX()-(width/2),center.getY()+(height/2));
+        Point point3 = new Point(center.getX()+(width/2),center.getY()+(height/2));
+        Point point4 = new Point(center.getX()+(width/2),center.getY()-(height/2));
+        Point[] allVertices={point1,point2,point3,point4};
+        this.vertices=allVertices;
     }
 
     /**
@@ -31,16 +39,23 @@ public class Rectangle extends Square {
      * @throws ShapeException throws exception if either height or width are invalid
      */
     public Rectangle(double x, double y,double height, double width)throws ShapeException{
-        super(x,y,height);
+        super(new Point(x,y));
+        Point center = new Point(x,y);
         Validator.validatePositiveDouble(width,"Invalid width");
         this.width=width;
+        Point point1 = new Point(center.getX()+(width/2),center.getY()+(height/2));
+        Point point2 = new Point(center.getX()+(width/2),center.getY()-(height/2));
+        Point point3 = new Point(center.getX()-(width/2),center.getY()-(height/2));
+        Point point4 = new Point(center.getX()-(width/2),center.getY()+(height/2));
+        Point[] allVertices={point1,point2,point3,point4};
+        this.vertices=allVertices;
     }
 
     /**
      *
      * @return area of the rectangle
      */
-    public double getArea(){return width*this.getHeight();}
+    public double getArea(){return width*height;}
 
     /**
      *
@@ -69,10 +84,35 @@ public class Rectangle extends Square {
      * @throws ShapeException throws exception if either height or width are invalid
      */
     public void setSize(double height, double width) throws ShapeException{
+        Validator.validatePositiveDouble(height,"Invalid height");
         Validator.validatePositiveDouble(width,"Invalid width");
         this.width = width;
-        this.setHeight(height);
+        this.height=height;
     }
 
+
+    /**
+     *
+     * @return height of our square
+     */
+    public double getHeight() {
+        return height;
+    }
+
+    /**
+     *
+     * @param height The height that we will set for the square
+     * @throws ShapeException throws exception if the height is invalid
+     */
+    public void setHeight(double height)throws ShapeException {
+        Validator.validatePositiveDouble(height, "Invalid height");
+        this.height = height;
+    }
+
+    /**
+     *
+     * @return vertices of our rectangle
+     */
+    public Point[] getVertices(){return vertices;}
 
 }

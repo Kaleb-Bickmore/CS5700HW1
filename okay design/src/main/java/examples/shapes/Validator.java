@@ -11,11 +11,13 @@ public class Validator {
         if (value<0)
             throw new ShapeException(errorMessage);
     }
-
-    public static void validateTriangle(double firstSide, double secondSide, double thirdSide, String errorMessage)//...
+    public static void validateTriangle(Point point1, Point point2, Point point3, String errorMessage)//...
             throws ShapeException{
-        if(firstSide >= secondSide+thirdSide|| thirdSide >= secondSide+firstSide||secondSide >= thirdSide+firstSide)
-        {
+        Line line1= new Line(point1,point2);
+        Line line2= new Line(point1,point3);
+        Line line3= new Line(point2,point3);
+        //if the two lines slope are the same
+        if(Math.abs(line1.computeSlope())==Math.abs(line2.computeSlope())){
             throw new ShapeException(errorMessage);
         }
     }

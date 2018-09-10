@@ -9,9 +9,9 @@ public class SquareTest {
     public void testValidConstruction() throws ShapeException {
         Point center = new Point(1,2);
         Square mySquare = new Square(center, 5);
-        assertEquals(5, mySquare.getHeight(), 0);
+        assertEquals(5, mySquare.getSize(), 0);
         mySquare = new Square(1.3, 2.6, 2.5);
-        assertEquals(2.5, mySquare.getHeight(), 0);
+        assertEquals(2.5, mySquare.getSize(), 0);
     }
 
     @Test
@@ -21,21 +21,21 @@ public class SquareTest {
             new Square( new Point(1, 2), Double.POSITIVE_INFINITY);
             fail("Expected exception not thrown");
         } catch (ShapeException e) {
-            assertEquals("Invalid height", e.getMessage());
+            assertEquals("Invalid size", e.getMessage());
         }
 
         try {
             new Square(new Point(1, 2), Double.NEGATIVE_INFINITY);
             fail("Expected exception not thrown");
         } catch (ShapeException e) {
-            assertEquals("Invalid height", e.getMessage());
+            assertEquals("Invalid size", e.getMessage());
         }
 
         try {
             new Square(new Point(1, 2), Double.NaN);
             fail("Expected exception not thrown");
         } catch (ShapeException e) {
-            assertEquals("Invalid height", e.getMessage());
+            assertEquals("Invalid size", e.getMessage());
         }
 
     }
@@ -51,39 +51,52 @@ public class SquareTest {
     }
 
     @Test
-    public void testGetHeight() throws ShapeException{
+    public void testGetSize() throws ShapeException{
         Point center = new Point(2,1);
         Square mySquare = new Square(center, 5);
-        assertEquals(5,mySquare.getHeight(),0);
+        assertEquals(5,mySquare.getSize(),0);
         Square newSquare = new Square(center, 6.43);
-        assertEquals(6.43,newSquare.getHeight(),0);
+        assertEquals(6.43,newSquare.getSize(),0);
     }
 
     @Test
-    public void testSetHeight() throws ShapeException{
+    public void testSetSize() throws ShapeException{
         Point center = new Point(2,1);
         Square mySquare = new Square(center, 5);
-        mySquare.setHeight(6);
-        assertEquals(6,mySquare.getHeight(),0);
-        mySquare.setHeight(6.43);
-        assertEquals(6.43,mySquare.getHeight(),0);
+        mySquare.setSize(6);
+        assertEquals(6,mySquare.getSize(),0);
+        mySquare.setSize(6.43);
+        assertEquals(6.43,mySquare.getSize(),0);
         try{
-            mySquare.setHeight(Double.POSITIVE_INFINITY);
+            mySquare.setSize(Double.POSITIVE_INFINITY);
             fail("Expected exception not thrown");
         } catch (ShapeException e) {
-            assertEquals("Invalid height", e.getMessage());
+            assertEquals("Invalid size", e.getMessage());
         }
         try{
-            mySquare.setHeight(Double.NEGATIVE_INFINITY);
+            mySquare.setSize(Double.NEGATIVE_INFINITY);
             fail("Expected exception not thrown");
         } catch (ShapeException e) {
-            assertEquals("Invalid height", e.getMessage());
+            assertEquals("Invalid size", e.getMessage());
         }
         try{
-            mySquare.setHeight(Double.NaN);
+            mySquare.setSize(Double.NaN);
             fail("Expected exception not thrown");
         } catch (ShapeException e) {
-            assertEquals("Invalid height", e.getMessage());
+            assertEquals("Invalid size", e.getMessage());
+        }
+    }
+    @Test
+    public void testGetVertices() throws ShapeException{
+        Point center = new Point(1,1);
+        Square mySquare = new Square(center, 2);
+        Point[] comparePoints={new Point(0.0,0.0),new Point(0.0,2.0),
+                new Point(2.0,2.0),new Point(2.0,0.0)};
+        Point[] myVertices= mySquare.getVertices();
+        for (int i=0;i <myVertices.length;i++){
+            assertEquals(myVertices[i].getX(),comparePoints[i].getX(),0.0);
+            assertEquals(myVertices[i].getY(),comparePoints[i].getY(),0.0);
+
         }
     }
 }

@@ -5,208 +5,86 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class TriangleTest {
+
     @Test
     public void testValidConstruction() throws ShapeException {
-        Point center = new Point(0,1);
-        Triangle myTriangle = new Triangle(center,1,1,1);
-        double[] compareArray={1,1,1};
-        assertArrayEquals(compareArray, myTriangle.getSideLengths(),0);
-        double [] compareArray2= {.5,.5,.5};
-        myTriangle = new Triangle(center,.5,.5,.5);
-        assertArrayEquals(compareArray2, myTriangle.getSideLengths(),0);
+        Point point1 = new Point(0,0);
+        Point point2 = new Point(0,2);
+        Point point3 = new Point(2,0);
+        Triangle myTriangle= new Triangle(point1,point2,point3);
+        Point[] comparePoints = {point1,point2,point3};
+        Point[] myVertices= myTriangle.getVertices();
+        for (int i=0;i <myVertices.length;i++){
+            assertEquals(myVertices[i].getX(),comparePoints[i].getX(),0.0);
+            assertEquals(myVertices[i].getY(),comparePoints[i].getY(),0.0);
+        }
+        assertEquals(myTriangle.getCenter().getX(),(point1.getX()+point2.getX()+point3.getX())/3,0.0001);
+        assertEquals(myTriangle.getCenter().getY(),(point1.getY()+point2.getY()+point3.getY())/3,0.0001);
+
     }
 
     @Test
     public void testInvalidConstruction() throws ShapeException {
         try {
-            new Triangle(new Point(1,1), 2.5,2.5, Double.POSITIVE_INFINITY);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
+            Triangle myTriangle = new Triangle(null, null, null);
+            fail("exception did not occur");
+        }catch (NullPointerException e){
+            assertEquals(e.getMessage(),null);
         }
-        try {
-            new Triangle(new Point(1,1), 2.5,2.5, Double.NaN);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            new Triangle(new Point(1,1), 2.5,2.5, Double.NEGATIVE_INFINITY);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            new Triangle(new Point(1,1), 2.5,Double.POSITIVE_INFINITY,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            new Triangle(new Point(1,1), 2.5,Double.NaN,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            new Triangle(new Point(1,1), 2.5, Double.NEGATIVE_INFINITY,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            new Triangle(new Point(1,1), Double.POSITIVE_INFINITY,2.5,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            new Triangle(new Point(1,1), Double.NaN,2.5,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            new Triangle(new Point(1,1), Double.NEGATIVE_INFINITY,2.5,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            new Triangle(new Point(1,1), 2.5,0,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid triangle", e.getMessage());
-        }
-        try {
-            new Triangle(new Point(1,1), 2.5,2.5,0);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid triangle", e.getMessage());
-        }
-        try {
-            new Triangle(new Point(1,1), 0,2.5,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid triangle", e.getMessage());
-        }
-        try {
-            new Triangle(new Point(1,1), 0,0,0);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid triangle", e.getMessage());
-        }
-
     }
 
     @Test
     public void testComputeArea() throws ShapeException{
-        Point center = new Point(1,1);
-        Triangle myTriangle = new Triangle(center, 2,2,2);
-        assertEquals(1.732,myTriangle.getArea(),0.001);
-        myTriangle = new Triangle(center, 1.3, 2.5, 1.4);
-        assertEquals(0.637, myTriangle.getArea(),0.001);
-    }
+        Point point1 = new Point(0,0);
+        Point point2 = new Point(0,2);
+        Point point3 = new Point(2,0);
+        Triangle myTriangle= new Triangle(point1,point2,point3);
+        assertEquals(2,myTriangle.getArea(),0.0001);
+        }
+
     @Test
     public void testGetSideLengths() throws ShapeException{
-        Point center = new Point(1,1);
-        Triangle myTriangle= new Triangle(center, 2,2,2);
-        double [] compareArray = {2,2,2};
-        assertArrayEquals(compareArray,myTriangle.getSideLengths(),0);
-        myTriangle= new Triangle(center,1.3,2.5,1.4);
-        double [] compareArray2 = {1.3,2.5,1.4};
-        assertArrayEquals(compareArray2,myTriangle.getSideLengths(),0);
+        Point point1 = new Point(0,0);
+        Point point2 = new Point(0,2);
+        Point point3 = new Point(2,0);
+        Triangle myTriangle= new Triangle(point1,point2,point3);
+        assertEquals(myTriangle.getSideLength()[0],2.00000,0.00001);
+        assertEquals(myTriangle.getSideLength()[1],2.82843,0.00001);
+        assertEquals(myTriangle.getSideLength()[2],2.00000,0.00001);
+
+
     }
+
     @Test
-    public void testSetSize() throws ShapeException {
-        Point center = new Point(1,1);
-        Triangle myTriangle= new Triangle(center, 2,2,2);
-        myTriangle.setSize(1,1,1);
-        double [] compareArray = {1,1,1};
-        assertArrayEquals(compareArray,myTriangle.getSideLengths(),0);
-        myTriangle.setSize(1.3,2.5,1.4);
-        double [] compareArray2 = {1.3,2.5,1.4};
-        assertArrayEquals(compareArray2,myTriangle.getSideLengths(),0);
-        try {
-            myTriangle.setSize( 2.5,2.5, Double.POSITIVE_INFINITY);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
+    public void testSetVertices() throws ShapeException {
+        Point point1 = new Point(0, 0);
+        Point point2 = new Point(0, 2);
+        Point point3 = new Point(2, 0);
+        Triangle myTriangle = new Triangle(point1, point2, point3);
+        Point newPoint1 = new Point(1, 1);
+        Point newPoint2 = new Point(1, 3);
+        Point newPoint3 = new Point(3, 1);
+        myTriangle.setVertices(newPoint1,newPoint2,newPoint3);
+        Point[] comparePoints = {newPoint1,newPoint2,newPoint3};
+        Point[] myVertices = myTriangle.getVertices();
+        for (int i = 0; i < myVertices.length; i++) {
+            assertEquals(myVertices[i].getX(), comparePoints[i].getX(), 0.0);
+            assertEquals(myVertices[i].getY(), comparePoints[i].getY(), 0.0);
         }
-        try {
-            myTriangle.setSize( 2.5,2.5, Double.NaN);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            myTriangle.setSize( 2.5,2.5, Double.NEGATIVE_INFINITY);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            myTriangle.setSize(2.5,Double.POSITIVE_INFINITY,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            myTriangle.setSize(2.5,Double.NaN,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            myTriangle.setSize(2.5, Double.NEGATIVE_INFINITY,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            myTriangle.setSize( Double.POSITIVE_INFINITY,2.5,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            myTriangle.setSize( Double.NaN,2.5,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            myTriangle.setSize(Double.NEGATIVE_INFINITY,2.5,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid side", e.getMessage());
-        }
-        try {
-            myTriangle.setSize(2.5,0,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid triangle", e.getMessage());
-        }
-        try {
-            myTriangle.setSize( 2.5,2.5,0);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid triangle", e.getMessage());
-        }
-        try {
-            myTriangle.setSize(0,2.5,2.5);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid triangle", e.getMessage());
-        }
-        try {
-            myTriangle.setSize( 0,0,0);
-            fail("Expected exception not thrown");
-        } catch (ShapeException e) {
-            assertEquals("Invalid triangle", e.getMessage());
-        }
-
     }
 
+    @Test
+    public void testGetVertices() throws ShapeException{
+        Point point1 = new Point(0,0);
+        Point point2 = new Point(0,2);
+        Point point3 = new Point(2,0);
+        Triangle myTriangle= new Triangle(point1,point2,point3);
+        Point[] comparePoints = {point1,point2,point3};
+        Point[] myVertices= myTriangle.getVertices();
+        for (int i=0;i <myVertices.length;i++){
+            assertEquals(myVertices[i].getX(),comparePoints[i].getX(),0.0);
+            assertEquals(myVertices[i].getY(),comparePoints[i].getY(),0.0);
 
+        }
+    }
 }

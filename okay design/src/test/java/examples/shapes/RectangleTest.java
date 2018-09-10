@@ -49,7 +49,7 @@ public class RectangleTest {
         assertEquals(48.1607,newRectangle.getArea(),0.0001);
 
     }
-
+    @Test
     public void testGetWidth() throws ShapeException{
         Point center = new Point(2,1);
         Rectangle myRectangle = new Rectangle(center, 5,10);
@@ -131,6 +131,57 @@ public class RectangleTest {
             fail("Expected exception not thrown");
         } catch (ShapeException e) {
             assertEquals("Invalid height", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testGetHeight() throws ShapeException{
+        Point center = new Point(2,1);
+        Rectangle myRectangle = new Rectangle(center, 5,10);
+        assertEquals(5,myRectangle.getHeight(),0);
+        Rectangle newRectangle = new Rectangle(center, 1.43, 6.43);
+        assertEquals(1.43,newRectangle.getHeight(),0);
+    }
+
+    @Test
+    public void testSetHeight() throws ShapeException{
+        Point center = new Point(2,1);
+        Rectangle myRectangle = new Rectangle(center, 4,2);
+        myRectangle.setHeight(6);
+        assertEquals(6,myRectangle.getHeight(),0);
+        myRectangle.setHeight(6.43);
+        assertEquals(6.43,myRectangle.getHeight(),0);
+        try{
+            myRectangle.setHeight(Double.POSITIVE_INFINITY);
+            fail("Expected exception not thrown");
+        } catch (ShapeException e) {
+            assertEquals("Invalid height", e.getMessage());
+        }
+        try{
+            myRectangle.setHeight(Double.NEGATIVE_INFINITY);
+            fail("Expected exception not thrown");
+        } catch (ShapeException e) {
+            assertEquals("Invalid height", e.getMessage());
+        }
+        try{
+            myRectangle.setHeight(Double.NaN);
+            fail("Expected exception not thrown");
+        } catch (ShapeException e) {
+            assertEquals("Invalid height", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testGetVertices() throws ShapeException{
+        Point center = new Point(2,1);
+        Rectangle myRectangle = new Rectangle(center, 2,4);
+        Point[] comparePoints={new Point(0.0,0.0),new Point(0.0,2.0),
+                new Point(4.0,2.0),new Point(4.0,0.0)};
+        Point[] myVertices= myRectangle.getVertices();
+        for (int i=0;i <myVertices.length;i++){
+            assertEquals(myVertices[i].getX(),comparePoints[i].getX(),0.0);
+            assertEquals(myVertices[i].getY(),comparePoints[i].getY(),0.0);
+
         }
     }
 }

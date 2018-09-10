@@ -15,6 +15,8 @@ public abstract class Shape{
      * @throws ShapeException throws exception if the position is invalid
      */
     public Shape(Point point) throws ShapeException {
+        if( point == null)
+            throw new ShapeException("Invalid center point");
         center = point;
     }
     /**

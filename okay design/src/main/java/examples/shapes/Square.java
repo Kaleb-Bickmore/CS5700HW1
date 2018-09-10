@@ -6,54 +6,73 @@ package examples.shapes;
  *  This represents a square class that extends on the shape class.
  */
 public class Square extends Shape {
-    private Double height;
-
+    private Double size;
+    private Point [] vertices;
     /**
      *
      * @param center center of our square
-     * @param height height of our square
-     * @throws ShapeException throws exception if the height of the square is invalid
+     * @param size size of our square
+     * @throws ShapeException throws exception if the size of the square is invalid
      */
-    public Square(Point center, double height) throws ShapeException{
+    public Square(Point center, double size) throws ShapeException{
         super(center);
-        Validator.validatePositiveDouble(height,"Invalid height");
-        this.height = height;
+        Validator.validatePositiveDouble(size,"Invalid size");
+        this.size = size;
+        Point point1 = new Point(center.getX()-(size/2),center.getY()-(size/2));
+        Point point2 = new Point(center.getX()-(size/2),center.getY()+(size/2));
+        Point point3 = new Point(center.getX()+(size/2),center.getY()+(size/2));
+        Point point4 = new Point(center.getX()+(size/2),center.getY()-(size/2));
+        Point[] allVertices={point1,point2,point3,point4};
+        this.vertices=allVertices;
     }
 
     /**
      *
      * @param x x coordinate of our square
      * @param y y coordinate of our square
-     * @param height height of our square
-     * @throws ShapeException throws exception if the height of the square is invalid
+     * @param size size of our square
+     * @throws ShapeException throws exception if the size of the square is invalid
      */
-    public Square(double x, double y, double height) throws ShapeException{
+    public Square(double x, double y, double size) throws ShapeException{
         super(new Point(x, y));
-        Validator.validatePositiveDouble(height,"Invalid height");
-        this.height = height;
+        Point center = new Point(x,y);
+        Validator.validatePositiveDouble(size,"Invalid size");
+        this.size = size;
+        Point point1 = new Point(center.getX()-(size/2),center.getY()-(size/2));
+        Point point2 = new Point(center.getX()-(size/2),center.getY()+(size/2));
+        Point point3 = new Point(center.getX()+(size/2),center.getY()+(size/2));
+        Point point4 = new Point(center.getX()+(size/2),center.getY()-(size/2));
+        Point[] allVertices={point1,point2,point3,point4};
+        this.vertices=allVertices;
     }
 
     /**
      *
      * @return Area of our square
      */
-    public double getArea(){return height*height;}
+    public double getArea(){return size*size;}
 
     /**
      *
-     * @return height of our square
+     * @return size of our square
      */
-    public double getHeight() {
-        return height;
+    public double getSize() {
+        return size;
     }
 
     /**
      *
-     * @param height The height that we will set for the square
-     * @throws ShapeException throws exception if the height is invalid
+     * @param size The size that we will set for the square
+     * @throws ShapeException throws exception if the size is invalid
      */
-    public void setHeight(double height)throws ShapeException {
-        Validator.validatePositiveDouble(height, "Invalid height");
-        this.height = height;
+    public void setSize(double size)throws ShapeException {
+        Validator.validatePositiveDouble(size, "Invalid size");
+        this.size = size;
     }
+
+    /**
+     *
+     * @return
+     */
+    public Point[] getVertices(){return vertices;}
 }
