@@ -72,7 +72,9 @@ public class Triangle extends Shape {
     public double[] getSideLength(){
         double[] sideLengths = {firstSide,secondSide,thirdSide};
         return sideLengths;}
-
+    public void setCenter(Point center)throws ShapeException{
+        throw new ShapeException("cannot set center of triangle");
+    }
 
 
 }

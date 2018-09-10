@@ -111,8 +111,24 @@ public class Rectangle extends Shape {
 
     /**
      *
+     * @throws ShapeException
+     */
+    public void setCenter(Point center)throws ShapeException{
+        if (center == null)
+            throw new ShapeException("Invalid center");
+        super.setCenter(center);
+        Point point1 = new Point(center.getX()-(width/2),center.getY()-(height/2));
+        Point point2 = new Point(center.getX()-(width/2),center.getY()+(height/2));
+        Point point3 = new Point(center.getX()+(width/2),center.getY()+(height/2));
+        Point point4 = new Point(center.getX()+(width/2),center.getY()-(height/2));
+        Point[] allVertices={point1,point2,point3,point4};
+        this.vertices=allVertices;
+    }
+    /**
+     *
      * @return vertices of our rectangle
      */
+
     public Point[] getVertices(){return vertices;}
 
 }

@@ -42,7 +42,9 @@ public abstract class Shape{
      *
      * @param center the center that we are setting for the shape
      */
-    public void setCenter(Point center) {
+    public void setCenter(Point center) throws ShapeException{
+        if(center == null)
+            throw new ShapeException("Invalid center");
         this.center = center;
     }
 }

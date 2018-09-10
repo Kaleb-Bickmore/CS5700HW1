@@ -84,7 +84,22 @@ public class TriangleTest {
         for (int i=0;i <myVertices.length;i++){
             assertEquals(myVertices[i].getX(),comparePoints[i].getX(),0.0);
             assertEquals(myVertices[i].getY(),comparePoints[i].getY(),0.0);
+        }
+
+    }
+    @Test
+    public void testSetCenter()throws ShapeException{
+        Point point1 = new Point(0,0);
+        Point point2 = new Point(0,2);
+        Point point3 = new Point(2,0);
+        Triangle myTriangle= new Triangle(point1,point2,point3);
+        try{
+            myTriangle.setCenter(new Point(1,2));
+            fail("expected exception not thrown");
+        }catch(ShapeException e){
+            assertEquals("cannot set center of triangle",e.getMessage());
 
         }
+
     }
 }

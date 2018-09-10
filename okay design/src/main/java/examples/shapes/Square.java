@@ -69,7 +69,19 @@ public class Square extends Shape {
         Validator.validatePositiveDouble(size, "Invalid size");
         this.size = size;
     }
-
+    public void setCenter(Point center)throws ShapeException{
+        if (center == null) {
+            throw new ShapeException("Invalid center");
+        } else {
+            super.setCenter(center);
+            Point point1 = new Point(center.getX() - (size / 2), center.getY() - (size / 2));
+            Point point2 = new Point(center.getX() - (size / 2), center.getY() + (size / 2));
+            Point point3 = new Point(center.getX() + (size / 2), center.getY() + (size / 2));
+            Point point4 = new Point(center.getX() + (size / 2), center.getY() - (size / 2));
+            Point[] allVertices = {point1, point2, point3, point4};
+            this.vertices = allVertices;
+        }
+    }
     /**
      *
      * @return

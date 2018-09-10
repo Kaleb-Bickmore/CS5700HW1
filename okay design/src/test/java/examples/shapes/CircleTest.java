@@ -281,5 +281,25 @@ public class CircleTest {
         Circle myCircle3 = new Circle(1, 2, 1.023454);
         assertEquals(1.023454,myCircle3.getXAxisRadius(),0.000001);
     }
+    @Test
+    public void testSetCenter()throws ShapeException{
+        Circle myCircle = new Circle(1, 2, 5);
+        myCircle.setCenter(new Point(3,2));
+        assertEquals(myCircle.getCenter().getX(),3,0);
+        assertEquals(myCircle.getCenter().getY(),2,0);
+        try {
+            myCircle.setCenter(null);
+            fail("expected exception");
+        }catch (ShapeException e){
+            assertEquals("Invalid center",e.getMessage());
+        }
+    }
+    @Test
+    public void testGetCenter() throws ShapeException{
+        Circle myCircle = new Circle(1, 2, 5);
+        assertEquals(myCircle.getCenter().getX(),1,0);
+        assertEquals(myCircle.getCenter().getY(),2,0);
+
+    }
 
 }
