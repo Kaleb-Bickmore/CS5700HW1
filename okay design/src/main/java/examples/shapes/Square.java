@@ -84,7 +84,18 @@ public class Square extends Shape {
     }
     /**
      *
-     * @return
+     * @return vertices of the square
      */
     public Point[] getVertices(){return vertices;}
+
+    /**
+     *
+     * @param deltaX            a delta change for the x-location of the square
+     * @param deltaY            a delta change for the y-location of the square
+     * @throws ShapeException
+     */
+    public void move(double deltaX,double deltaY)throws ShapeException{
+        this.setCenter(new Point(this.getCenter().getX()+deltaX,this.getCenter().getY()+deltaY));
+
+    }
 }

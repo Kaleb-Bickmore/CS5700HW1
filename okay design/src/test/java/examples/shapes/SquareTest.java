@@ -119,4 +119,18 @@ public class SquareTest {
 
         }
     }
+    @Test
+    public void testMove()throws ShapeException{
+        Point center = new Point(0,0);
+        Square mySquare = new Square(center, 2);
+        mySquare.move(1,1);
+        Point[] comparePoints={new Point(0.0,0.0),new Point(0.0,2.0),
+                new Point(2.0,2.0),new Point(2.0,0.0)};
+        Point[] myVertices= mySquare.getVertices();
+        for (int i=0;i <myVertices.length;i++) {
+            assertEquals(myVertices[i].getX(), comparePoints[i].getX(), 0.0);
+            assertEquals(myVertices[i].getY(), comparePoints[i].getY(), 0.0);
+        }
+
+    }
 }

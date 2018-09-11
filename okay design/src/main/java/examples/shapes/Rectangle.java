@@ -130,5 +130,15 @@ public class Rectangle extends Shape {
      */
 
     public Point[] getVertices(){return vertices;}
+    /**
+     *
+     * @param deltaX            a delta change for the x-location of the rectangle
+     * @param deltaY            a delta change for the y-location of the rectangle
+     * @throws ShapeException
+     */
+    public void move(double deltaX,double deltaY)throws ShapeException{
+        this.setCenter(new Point(this.getCenter().getX()+deltaX,this.getCenter().getY()+deltaY));
+
+    }
 
 }
