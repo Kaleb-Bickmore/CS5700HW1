@@ -59,7 +59,7 @@ public class Rectangle extends Shape {
 
     /**
      *
-     * @return width of the rectangle
+     * @return width of the rectangleset
      */
     public double getWidth() {
 
