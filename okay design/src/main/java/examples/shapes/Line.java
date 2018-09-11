@@ -82,4 +82,5 @@ public class Line {
     public double computeSlope() {
         return (point2.getY() - point1.getY())/(point2.getX() - point1.getX());
     }
+
 }

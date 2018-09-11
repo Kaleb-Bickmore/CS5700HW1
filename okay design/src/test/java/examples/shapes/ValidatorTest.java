@@ -75,4 +75,32 @@ public class ValidatorTest {
             assertEquals("Invalid", ex.getMessage());
         }
     }
+    @Test
+    public void testValidateTriangle() throws ShapeException{
+        try{
+            Validator.validateTriangle( new Point(0,0),new Point(0,1),new Point(0,.5), "invalid triangle");
+            fail("Expected exception not thrown");
+        }
+        catch(ShapeException e){
+            assertEquals("invalid triangle", e.getMessage());
+
+        }
+        try{
+            Validator.validateTriangle( new Point(0,0),new Point(0,.5),new Point(0,1), "invalid triangle");
+            fail("Expected exception not thrown");
+        }
+        catch(ShapeException e) {
+            assertEquals("invalid triangle", e.getMessage());
+        }
+        try{
+            Validator.validateTriangle( new Point(0,.5),new Point(0,0),new Point(0,1), "invalid triangle");
+            fail("Expected exception not thrown");
+        }
+        catch(ShapeException e) {
+            assertEquals("invalid triangle", e.getMessage());
+        }
+
+
+    }
+
 }
